@@ -5,7 +5,10 @@ var playerMoney = 10
 
 console.log(playerName, playerAttack, playerHealth)
 
-var enemyName = 'Roborto'
+var enemyNames = ['Roborto', 'Amy Android', 'Robo Trumble']
+console.log(enemyNames[1])
+console.log(enemyNames[enemyNames.length - 1])
+
 var enemyHealth = 50
 var enemyAttack = 12
 
@@ -45,7 +48,7 @@ var fight = function() {
       window.alert(playerName + ' still has ' + playerHealth + ' health left.')
     }
   }
-  else if (promptFight === 'SKIP' || 'skip') {
+  else if (promptFight === 'SKIP' || promptFight === 'skip') {
     var confirmSkip = window.confirm('Are you sure you want to quit?')
 
     // if yes (true), leave fight and deduct from playerMoney
@@ -60,4 +63,4 @@ var fight = function() {
 
 }
 
-fight()
+// fight()
