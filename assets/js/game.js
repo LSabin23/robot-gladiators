@@ -3,16 +3,12 @@ var playerHealth = 100
 var playerAttack = 10
 var playerMoney = 10
 
-console.log(playerName, playerAttack, playerHealth)
-
 var enemyNames = ['Roborto', 'Amy Android', 'Robo Trumble']
-console.log(enemyNames[1])
-console.log(enemyNames[enemyNames.length - 1])
-
 var enemyHealth = 50
 var enemyAttack = 12
 
-var fight = function() {
+// enemyName is a parameter or a placeholder for the argument that will get passed when the function is called. Argument content becomes enemyName so enemyName is used in function if-else.
+var fight = function(enemyName) {
   window.alert('Welcome to Robot Gladiators!')
   var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter FIGHT or SKIP to choose.')
 
@@ -60,7 +56,9 @@ var fight = function() {
       fight()
     }
   }
-
 }
 
-// fight()
+for (var i = 0; i < enemyNames.length; i++) {
+  // enemyNames[i] is whatever value is at i's current value of the enemyNames array and is passed to enemyName parameter in function expression or declaration
+  fight(enemyNames[i])
+}
