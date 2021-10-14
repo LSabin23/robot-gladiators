@@ -8,10 +8,10 @@ var enemyHealth = 50
 var enemyAttack = 12
 
 // window.alert('Welcome to Robot Gladiators!')
-
+console.log('test console log')
 // enemyName is a parameter or a placeholder for the argument that will get passed when the function is called. Argument content becomes enemyName so enemyName is used in function if-else.
 var fight = function(enemyName) {
-  while (enemyHealth > 0) {
+  while (enemyHealth > 0 && playerHealth > 0) {
     var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter FIGHT or SKIP to choose.')
 
     if (promptFight === 'FIGHT' || promptFight === 'fight') {
@@ -25,6 +25,7 @@ var fight = function(enemyName) {
       // check enemy's health and display enemy status or value to the user
       if (enemyHealth <= 0) {
         window.alert(enemyName + ' has died.')
+        break
       }
       else {
         window.alert(enemyName + ' still has ' + enemyHealth + ' health left.')
@@ -41,6 +42,7 @@ var fight = function(enemyName) {
       // check player health and display player status or value to the user
       if (playerHealth <= 0) {
         window.alert(playerName + ' has died.')
+        break
       }
       else {
         window.alert(playerName + ' still has ' + playerHealth + ' health left.')
@@ -53,6 +55,8 @@ var fight = function(enemyName) {
       if (confirmSkip) {
         window.alert(playerName + ' has chosen to skip this fight. Goodbye!')
         playerMoney = playerMoney - 2
+        console.log('playerMoney', playerMoney)
+        // break
       }
       else {
         fight()
