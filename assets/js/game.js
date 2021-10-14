@@ -7,7 +7,6 @@ var enemyNames = ['Roborto', 'Amy Android', 'Robo Trumble']
 var enemyHealth = 50
 var enemyAttack = 12
 
-// window.alert('Welcome to Robot Gladiators!')
 console.log('test console log')
 // enemyName is a parameter or a placeholder for the argument that will get passed when the function is called. Argument content becomes enemyName so enemyName is used in function if-else.
 var fight = function(enemyName) {
@@ -17,7 +16,6 @@ var fight = function(enemyName) {
     if (promptFight === 'SKIP' || promptFight === 'skip') {
       var confirmSkip = window.confirm('Are you sure you want to quit?')
 
-      // if yes (true), leave fight and deduct from playerMoney
       if (confirmSkip) {
         window.alert(playerName + ' has chosen to skip this fight. Goodbye!')
         playerMoney = playerMoney - 2
@@ -39,15 +37,12 @@ var fight = function(enemyName) {
       window.alert(enemyName + ' still has ' + enemyHealth + ' health left.')
     }
 
-    // Subtract the value of 'enemyAttack' from the value of 'playerHealth' and use that result to update the value in the 'playerHealth' variable
     playerHealth = playerHealth - enemyAttack
 
-    // Log a resulting message to the console so that we know it worked
     console.log(
       enemyName + ' attacked ' + playerName + '. ' + playerName + ' now has ' + playerHealth + ' health remaining.'
     )
 
-    // check player health and display player status or value to the user
     if (playerHealth <= 0) {
       window.alert(playerName + ' has died.')
       break
@@ -59,8 +54,15 @@ var fight = function(enemyName) {
 }
 
 for (var i = 0; i < enemyNames.length; i++) {
-  var pickedEnemyName = enemyNames[i]
-  enemyHealth = 50
-  // enemyNames[i] is whatever value is at i's current value of the enemyNames array and is passed to enemyName parameter in function expression or declaration
-  fight(pickedEnemyName)
+  if (playerHealth > 0) {
+    window.alert('Welcome to Robot Gladiators! Round ' + (i + 1))
+    var pickedEnemyName = enemyNames[i]
+    enemyHealth = 50
+    // enemyNames[i] is whatever value is at i's current value of the enemyNames array and is passed to enemyName parameter in function expression or declaration
+    fight(pickedEnemyName)
+  }
+  else {
+    window.alert('Your robot has perished in battle! Game Over!')
+    break
+  }
 }
