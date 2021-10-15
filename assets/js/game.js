@@ -7,8 +7,12 @@ var enemyNames = ['Roborto', 'Amy Android', 'Robo Trumble']
 var enemyHealth = 50
 var enemyAttack = 12
 
-console.log('test console log')
-// enemyName is a parameter or a placeholder for the argument that will get passed when the function is called. Argument content becomes enemyName so enemyName is used in function if-else.
+// Using window.prompt and window.confirm can cause some issues with Chrome's DevTools not properly accessing the JavaScript file for console logs
+// If this happens, comment out script.js line in the HTML file, open in browser, open DevTools > Console
+// Uncomment script.js line from HTML and reload browser
+// Test line is being left below for easy testing. Should appear immediately on page reload.
+// console.log('test console log')
+
 var fight = function(enemyName) {
   while (enemyHealth > 0 && playerHealth > 0) {
     var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter FIGHT or SKIP to choose.')
@@ -53,16 +57,40 @@ var fight = function(enemyName) {
   }
 }
 
-for (var i = 0; i < enemyNames.length; i++) {
+var startGame = function () {
+  playerHealth = 100
+  playerAttack = 10
+  playerMoney = 10
+  for (var i = 0; i < enemyNames.length; i++) {
+    if (playerHealth > 0) {
+      window.alert('Welcome to Robot Gladiators! Round ' + (i + 1))
+      var pickedEnemyName = enemyNames[i]
+      enemyHealth = 50
+      fight(pickedEnemyName)
+    }
+    else {
+      window.alert('Your robot has perished in battle! Game Over!')
+      break
+    }
+  }
+  endGame()
+}
+
+var endGame = function () {
   if (playerHealth > 0) {
-    window.alert('Welcome to Robot Gladiators! Round ' + (i + 1))
-    var pickedEnemyName = enemyNames[i]
-    enemyHealth = 50
-    // enemyNames[i] is whatever value is at i's current value of the enemyNames array and is passed to enemyName parameter in function expression or declaration
-    fight(pickedEnemyName)
+    window.alert('VICTORY! You now have a score of ' + playerMoney + '.')
   }
   else {
-    window.alert('Your robot has perished in battle! Game Over!')
-    break
+    window.alert('Your robot has perished in battle!')
+  }
+
+  var playAgainConfirm = window.confirm('Would you like to play again?')
+  if (playAgainConfirm) {
+    startGame()
+  }
+  else {
+    window.alert('Thank you for playng Robot Gladiators!')
   }
 }
+
+startGame()
