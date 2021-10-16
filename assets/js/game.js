@@ -61,12 +61,22 @@ var startGame = function () {
   playerHealth = 100
   playerAttack = 10
   playerMoney = 10
+
+  // RESET ENEMY STATS
+
   for (var i = 0; i < enemyNames.length; i++) {
     if (playerHealth > 0) {
       window.alert('Welcome to Robot Gladiators! Round ' + (i + 1))
       var pickedEnemyName = enemyNames[i]
       enemyHealth = 50
       fight(pickedEnemyName)
+      if (playerHealth > 0 && i < enemyNames.length - 1) {
+        // need a variable here to hold a value - in this case true/false - to supply to our if statement
+        var storeConfirm = window.confirm('The round is over. Visit the shop before the next round?')
+        if (storeConfirm) {
+          shop()
+        }
+      }
     }
     else {
       window.alert('Your robot has perished in battle! Game Over!')
@@ -90,6 +100,49 @@ var endGame = function () {
   }
   else {
     window.alert('Thank you for playng Robot Gladiators!')
+  }
+}
+
+var shop = function () {
+  // need a variable here to pass to an if statement to determine what to do with the information the player supplies for the prompt
+  var shopOptionPrompt = window.prompt(
+    'Would you like to REFILL your health, UPGRADE your attack, or LEAVE the shop? Enter REFILL, UPGRADE, or LEAVE to choose.'
+  )
+  switch (shopOptionPrompt) {
+    case 'refill':
+    case 'REFILL':
+      if (playerMoney >= 7) {
+        window.alert('Refilling player\'s health by 20 points for 7 dollars.')
+        playerHealth = playerHealth + 20
+        playerMoney = playerMoney - 7
+      }
+      else {
+        window.alert('You don\'t have enough money!')
+      }
+      // stop the shop function and resume the fight function where it left off when shop was called
+      break
+    case 'upgrade':
+    case 'UPGRADE':
+      if (playerMoney >= 7) {
+        window.alert('Upgrading player\'s attack by 6 points for 7 dollars.')
+        playerAttack = playerAttack + 6
+        playerMoney = playerMoney - 7
+      }
+      else {
+        window.alert('You don\'t have enough money!')
+      }
+      // stop the shop function and resume the fight function where it left off when shop was called
+      break
+    case 'leave':
+    case 'LEAVE':
+      window.alert('Leaving the shop.')
+      // stop the shop function and resume the fight function where it left off when shop was called
+      break
+    default:
+      window.alert('Please enter a valid option.')
+      shop()
+      // need to break the switch here to rerun the shop function
+      break
   }
 }
 
