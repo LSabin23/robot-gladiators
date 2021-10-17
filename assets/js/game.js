@@ -128,8 +128,18 @@ var randomNumber = function (min, max) {
   return value
 }
 
+var getPlayerName = function () {
+  // initialize name variable with '' before the while loop to guarantee entering the loop at least once to prompt the player for the player-robot name
+  var name = ''
+  while (name === '' || name === null) {
+    name = window.prompt('What is your robot\'s name?')
+  }
+  console.log('Your robot\'s name is ' + name)
+  return name
+}
+
 var playerInfo = {
-  name: window.prompt('What is your robot\'s name?'),
+  name: getPlayerName(),
   health: 100,
   attack: 10,
   money: 10,
