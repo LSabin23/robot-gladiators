@@ -102,11 +102,20 @@ var startGame = function () {
 }
 
 var endGame = function () {
-  if (playerInfo.health > 0) {
-    window.alert('VICTORY! You now have a score of ' + playerInfo.money + '.')
+  window.alert('The game has now ended. Let\'s see how you did!')
+
+  var highScore = localStorage.getItem('highscore')
+  if (highScore === null) {
+    highScore = 0
+  }
+
+  if (playerInfo.money > highScore) {
+    localStorage.setItem('highscore', playerInfo.money)
+    localStorage.setItem('name', playerInfo.name)
+    window.alert(playerInfo.name + ' now has the high score of ' + playerInfo.money)
   }
   else {
-    window.alert('Your robot has perished in battle!')
+    window.alert(playerInfo.name + ' did not beat the highscore of ' + highScore + '. Maybe next time!')
   }
 
   var playAgainConfirm = window.confirm('Would you like to play again?')
