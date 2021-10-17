@@ -27,41 +27,52 @@ var fightOrSkip = function () {
 }
 
 var fight = function (enemy) {
+  var isPlayerTurn = true
+
+  if (Math.random() > 0.5) {
+    isPlayerTurn = false
+  }
+
   while (enemy.health > 0 && playerInfo.health > 0) {
-    if (fightOrSkip()) {
-      break
-    }
+    if (isPlayerTurn) {
+      if (fightOrSkip()) {
+        break
+      }
 
-    var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack)
-    enemy.health = Math.max(0, enemy.health - damage)
-    console.log(
-      playerInfo.name + ' attacked ' + enemy.name + '. ' + enemy.name + ' now has ' + enemy.health + ' health remaining.'
-    )
+      var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack)
+      enemy.health = Math.max(0, enemy.health - damage)
+      console.log(
+        playerInfo.name + ' attacked ' + enemy.name + '. ' + enemy.name + ' now has ' + enemy.health + ' health remaining.'
+      )
 
-    if (enemy.health <= 0) {
-      window.alert(enemy.name + ' has died.')
-      break
-    }
-    else {
-      window.alert(enemy.name + ' still has ' + enemy.health + ' health left.')
-    }
-
-    // reusing damage here because we need to reset its value based off of either player or enemy attack before the attack occurs.
-    // won't use it again until the next round of fighting where we'll need to reevaluate it again in case the player visits the shop
-    var damage = randomNumber(enemy.attack - 3, enemy.attack)
-    playerInfo.health = Math.max(0, playerInfo.health - damage)
-
-    console.log(
-      enemy.name + ' attacked ' + playerInfo.name + '. ' + playerInfo.name + ' now has ' + playerInfo.health + ' health remaining.'
-    )
-
-    if (playerInfo.health <= 0) {
-      window.alert(playerInfo.name + ' has died.')
-      break
+      if (enemy.health <= 0) {
+        window.alert(enemy.name + ' has died.')
+        playerInfo.money = playerInfo.money + 20
+        break
+      }
+      else {
+        window.alert(enemy.name + ' still has ' + enemy.health + ' health left.')
+      }
     }
     else {
-      window.alert(playerInfo.name + ' still has ' + playerInfo.health + ' health left.')
+      // reusing damage here because we need to reset its value based off of either player or enemy attack before the attack occurs.
+      // won't use it again until the next round of fighting where we'll need to reevaluate it again in case the player visits the shop
+      var damage = randomNumber(enemy.attack - 3, enemy.attack)
+      playerInfo.health = Math.max(0, playerInfo.health - damage)
+
+      console.log(
+        enemy.name + ' attacked ' + playerInfo.name + '. ' + playerInfo.name + ' now has ' + playerInfo.health + ' health remaining.'
+      )
+
+      if (playerInfo.health <= 0) {
+        window.alert(playerInfo.name + ' has died.')
+        break
+      }
+      else {
+        window.alert(playerInfo.name + ' still has ' + playerInfo.health + ' health left.')
+      }
     }
+    isPlayerTurn = !isPlayerTurn
   }
 }
 
