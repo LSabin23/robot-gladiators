@@ -110,21 +110,19 @@ var endGame = function () {
 var shop = function () {
   // need a variable here to pass to an if statement to determine what to do with the information the player supplies for the prompt
   var shopOptionPrompt = window.prompt(
-    'Would you like to REFILL your health, UPGRADE your attack, or LEAVE the shop? Enter REFILL, UPGRADE, or LEAVE to choose.'
+    'Would you like to REFILL your health, UPGRADE your attack, or LEAVE the shop? Enter 1 for REFILL, 2 for UPGRADE, or 3 to LEAVE.'
   )
+  shopOptionPrompt = parseInt(shopOptionPrompt)
   switch (shopOptionPrompt) {
-    case 'refill':
-    case 'REFILL':
+    case 1:
       playerInfo.refillHealth()
       // stop the shop function and resume the fight function where it left off when shop was called
       break
-    case 'upgrade':
-    case 'UPGRADE':
+    case 2:
       playerInfo.upgradeAttack()
       // stop the shop function and resume the fight function where it left off when shop was called
       break
-    case 'leave':
-    case 'LEAVE':
+    case 3:
       window.alert('Leaving the shop.')
       // stop the shop function and resume the fight function where it left off when shop was called
       break
